@@ -31,6 +31,19 @@ pipeline {
                 sh 'docker build -t gestion-stock-frontend --build-arg VITE_API_URL=http://localhost:8080/api .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker stop gestion-stock-frontend || true
+                    docker rm gestion-stock-frontend || true
+                    docker run -d --name gestion-stock-frontend \
+                        --network gestion-stock-network \
+                        -p 5173:80 \
+                        gestion-stock-frontend
+                '''
+            }
+        }
     }
 
     post {
