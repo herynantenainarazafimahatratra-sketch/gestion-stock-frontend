@@ -1,17 +1,14 @@
-import { createContext, useContext, useState, useEffect } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-
   // Au chargement de l'app, on vérifie si un utilisateur était déjà connecté (localStorage)
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const stored = localStorage.getItem("auth");
-    if (stored) {
-      setUser(JSON.parse(stored));
-    }
-  }, []);
+    return stored ? JSON.parse(stored) : null;
+  });
 
   const loginUser = (authData) => {
     // authData = { token, nom, email, role }

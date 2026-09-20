@@ -11,6 +11,7 @@ function ListeFournisseurs({ refreshKey }) {
   const [suppressionId, setSuppressionId] = useState(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset volontaire du chargement à chaque refetch
     setChargement(true);
     setErreur(null);
     getFournisseurs()

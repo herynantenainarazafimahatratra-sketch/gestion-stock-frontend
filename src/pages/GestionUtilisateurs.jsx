@@ -18,6 +18,7 @@ function GestionUtilisateurs() {
   const [erreurBenefices, setErreurBenefices] = useState(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset volontaire du chargement à chaque refetch
     setChargementBenefices(true);
     setErreurBenefices(null);
     getBeneficeParMois()
